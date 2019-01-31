@@ -3,11 +3,20 @@
 import Vue from 'vue'
 import App from './App'
 import ElementUI from 'element-ui'
+// 回顾axios
+// import axios from 'axios'
+// Vue.prototype.$http = axios
+
+// 把一个不是第三方插件的Vue库变成第Vue插件
+import MyserverHttp from '@/plugins/http.js'
+
 // 不要忘记引入样式文件
 import 'element-ui/lib/theme-chalk/index.css'
+import '@/assets/css/reset.css'
 import router from './router'
-// 使用Vue插件
+// 使用Vue插件 只有Vue插件可以使用use方法
 Vue.use(ElementUI)
+Vue.use(MyserverHttp)
 // 项目上线阶段 生产环境Vue提示不输出
 Vue.config.productionTip = false
 /* eslint-disable no-new */
