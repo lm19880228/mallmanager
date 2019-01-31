@@ -45,12 +45,14 @@ export default {
           // 登陆成功
           // 1. 跳转home
           this.$router.push({name:'home'})
+          this.$message.success(msg);
+
           // 2. 提示成功
          }else{
             // 不成功
         //  1. 提示信息
-        this.$message.warning(msg);
-        this.formdata = ''
+         this.$message.warning(msg);
+         this.formdata = ''
         }
       
       });
