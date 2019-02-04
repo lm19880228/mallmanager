@@ -20,15 +20,20 @@
     </el-header>
     <el-container>
       <el-aside class="aside" width="200px">
+        <!-- 侧边栏导航el-mene -->
         <!-- 此处虽然本实例内没有 unique-opened属性 但是Vue.js里面有 -->
-        <el-menu :unique-opened="true">
+        <!-- 开启路由模式 -->
+        <el-menu 
+        :router="true"
+        :unique-opened="true">
           <el-submenu index="1">
-            <!-- 侧边栏导航el-mene -->
+      
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>用户管理</span>
             </template>
-            <el-menu-item index="1-1">
+            <!-- 此处相当于router-link -->
+            <el-menu-item index="users">
               <i class="el-icon-menu"></i>
               <span>用户量列表</span>
             </el-menu-item>
@@ -91,7 +96,9 @@
           </el-submenu>
         </el-menu>
       </el-aside>
-      <el-main class="main">Main</el-main>
+      <el-main class="main">
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>

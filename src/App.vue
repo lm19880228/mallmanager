@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <!-- 其他组件展示的容器要写在1根组件中 -->
+     <!-- 其他组件展示的容器要写在根组件中 -->
     <router-view/>
   </div>
 </template>
