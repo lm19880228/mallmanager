@@ -54,6 +54,7 @@ export default {
       if (status === 200) {
         // 登陆成功 保存token 跳转home 提示成功
         // localStorage.setItem('key',value) 将后台返回token字符串存入本地存储
+        // localStorage.getItem('key') 获取token
         localStorage.setItem("token", data.token);
         this.$router.push({ name: "home" });
         this.$message.success(msg);

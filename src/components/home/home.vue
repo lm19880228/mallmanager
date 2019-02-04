@@ -20,6 +20,7 @@
     </el-header>
     <el-container>
       <el-aside class="aside" width="200px">
+        <!-- 此处虽然本实例内没有 unique-opened属性 但是Vue.js里面有 -->
         <el-menu :unique-opened="true">
           <el-submenu index="1">
             <!-- 侧边栏导航el-mene -->
@@ -97,8 +98,16 @@
 
 <script>
 export default {
-  data() {
-    return {};
+  // newVue之前自动触发 验证是否是正常登陆(防止跳墙登陆)
+  beforeCreate() {
+    // 1.获取token
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      // token 没有 -> 登陆
+      this.$router.push({ name: "login" });
+    }
+     // token 有 -> 继续渲染组件(继续执行钩子函数)
   }
 };
 </script>
