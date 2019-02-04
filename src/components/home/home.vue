@@ -107,18 +107,17 @@ export default {
       // token 没有 -> 登陆
       this.$router.push({ name: "login" });
     }
-     // token 有 -> 继续渲染组件(继续执行钩子函数)
+    // token 有 -> 继续渲染组件(继续执行钩子函数)
   },
-  methods:{
-      handleSignout(){
-          // 1. 清除token
-          localStorage.clear()
-          // 2. 提示
-          this.$message.success('退出成功')
-          // 3. 来到login组件
-          this.$router.push({name:'login'})
-
-      }
+  methods: {
+    handleSignout() {
+      // 1. 清除token
+      localStorage.clear();
+      // 2. 提示
+      this.$message.success("退出成功");
+      // 3. 来到login组件
+      this.$router.push({ name: "login" });
+    }
   }
 };
 </script>
