@@ -1,3 +1,5 @@
+//引入组件 配置路由
+
 import Vue from "vue";
 import Router from "vue-router";
 // import login from '../components/login/login.vue'
@@ -19,6 +21,7 @@ export default new Router({
       name: "home",
       path: "/",
       component: Home,
+      //路由嵌套
       children: [
         {
           name: "users",

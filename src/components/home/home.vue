@@ -24,10 +24,9 @@
         <!-- 此处虽然本实例内没有 unique-opened属性 但是Vue.js里面有 -->
         <!-- 开启路由模式 -->
         <el-menu 
-        :router="true"
-        :unique-opened="true">
+        :unique-opened="true" 
+        :router="true">
           <el-submenu index="1">
-      
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>用户管理</span>
