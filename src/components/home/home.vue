@@ -23,8 +23,8 @@
         <!-- 侧边栏导航el-mene -->
         <!-- 此处虽然本实例内没有 unique-opened属性 但是Vue.js里面有 -->
         <!-- 开启路由模式 -->
-        <el-menu 
-        :unique-opened="true" 
+        <el-menu
+        :unique-opened="true"
         :router="true">
           <el-submenu index="1">
             <template slot="title">
@@ -105,27 +105,27 @@
 <script>
 export default {
   // newVue之前自动触发 验证是否是正常登陆(防止跳墙登陆)
-  beforeCreate() {
+  beforeCreate () {
     // 1.获取token
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token')
 
     if (!token) {
       // token 没有 -> 登陆
-      this.$router.push({ name: "login" });
+      this.$router.push({ name: 'login' })
     }
     // token 有 -> 继续渲染组件(继续执行钩子函数)
   },
   methods: {
-    handleSignout() {
+    handleSignout () {
       // 1. 清除token
-      localStorage.clear();
+      localStorage.clear()
       // 2. 提示
-      this.$message.success("退出成功");
+      this.$message.success('退出成功')
       // 3. 来到login组件
-      this.$router.push({ name: "login" });
+      this.$router.push({ name: 'login' })
     }
   }
-};
+}
 </script>
 
 <style>

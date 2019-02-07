@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import ElementUI from 'element-ui'
+import moment from 'moment'
 // 回顾axios
 // import axios from 'axios'
 // Vue.prototype.$http = axios
@@ -19,6 +20,12 @@ Vue.use(ElementUI)
 Vue.use(MyserverHttp)
 // 项目上线阶段 生产环境Vue提示不输出
 Vue.config.productionTip = false
+
+// 全局过滤器 - 处理日期
+Vue.filter('fmtdate', v => {
+  return moment(v).format('YYYY-MM-DD')
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

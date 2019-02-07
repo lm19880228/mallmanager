@@ -16,51 +16,50 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      labelPosition: "top",
+      labelPosition: 'top',
       formdata: {
-        username: "",
-        password: ""
+        username: '',
+        password: ''
       }
-    };
+    }
   },
-  //回车进入
-  mounted: function() {
+  // 回车进入
+  mounted: function () {
     // 主页添加键盘事件,注意,不能直接在焦点事件上添加回车
-    var lett = this; // this 当前Vue实例
-     console.log(this)
-    document.onkeydown = function(e) {
-      var key = window.event.keyCode;
+    var lett = this // this 当前Vue实例
+    console.log(this)
+    document.onkeydown = function (e) {
+      var key = window.event.keyCode
       if (key == 13) {
-     
-        lett.handleLogin();
+        lett.handleLogin()
       }
-    };
+    }
   },
   methods: {
-    async handleLogin() {
+    async handleLogin () {
       // 希望让异步操作的代码看起来像同步代码 ES7写法:async+await
       // res就是 .then()方法里面的后端返回值
-      const res = await this.$http.post("login", this.formdata);
+      const res = await this.$http.post('login', this.formdata)
       // console.log(res);
-     
+
       const {
         // 把等号右侧数据中键名为data的值赋值给data
         data,
         // 去等号右侧数据中找到meta的值
         meta: { msg, status }
-      } = res.data;
+      } = res.data
       if (status === 200) {
         // 登陆成功 保存token 跳转home 提示成功
         // localStorage.setItem('key',value) 将后台返回token字符串存入本地存储
         // localStorage.getItem('key') 获取token
-        localStorage.setItem("token", data.token);
-        this.$router.push({ name: "home" });
-        this.$message.success(msg);
+        localStorage.setItem('token', data.token)
+        this.$router.push({ name: 'home' })
+        this.$message.success(msg)
       } else {
         // 不成功 提示信息
-        this.$message.warning(msg);
+        this.$message.warning(msg)
       }
     }
 
@@ -93,7 +92,7 @@ export default {
 
     // });
   }
-};
+}
 </script>
 
 <style>
