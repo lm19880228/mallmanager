@@ -12,10 +12,16 @@
     <el-row class="searchRow">
       <!-- 列 -->
       <el-col>
-        <el-input placeholder="请输入内容" v-model="query" class="inputSearch">
-          <el-button slot="append" icon="el-icon-search"></el-button>
+        <el-input
+          @clear="loadUserList()"
+          placeholder="请输入内容"
+          v-model="query"
+          clearable
+          class="inputSearch"
+        >
+          <el-button @click="searchUser()" slot="append" icon="el-icon-search"></el-button>
         </el-input>
-        <el-button type="success">添加用户</el-button>
+        <el-button type="success" @click="showAddUserDia()">添加用户</el-button>
       </el-col>
     </el-row>
     <!-- 3.表格 -->
@@ -57,6 +63,29 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total="total"
     ></el-pagination>
+
+    <!-- 对话框 -->
+    <!-- 1.添加用户对话框 -->
+    <el-dialog title="添加用户" :visible.sync="dialogFormVisibleAdd">
+      <el-form :model="form">
+        <el-form-item label="用户名" label-width="100px">
+          <el-input v-model="form.username" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" label-width="100px">
+          <el-input v-model="form.password" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱" label-width="100px">
+          <el-input v-model="form.email" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="电话" label-width="100px">
+          <el-input v-model="form.mobile" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisibleAdd = false">取 消</el-button>
+        <el-button type="primary" @click="addUser()">确 定</el-button>
+      </div>
+    </el-dialog>
   </el-card>
 </template>
 
@@ -72,26 +101,80 @@ export default {
       // 初始显示页数
       pagenum: 1,
       // 每页显示条数
-      pagesize: 2
+      pagesize: 2,
+      // 添加对话框的属性
+      dialogFormVisibleAdd: false,
+      // 添加用户的表单数据
+      form: {
+        username: "",
+        password: "",
+        email: "",
+        mobile: ""
+      }
     };
   },
   created() {
     this.getUserList();
   },
   methods: {
+    // 添加用户 -- 发送氢气球
+    async addUser() {
+      const res = await this.$http.post(`users`, this.form);
+      console.log(res);
+      const {
+        meta: { status, msg },
+        data
+      } = res.data;
+      if (status === 201) {
+        //1. 提示成功
+        console.log(msg);
+        this.$message.success(msg);
+        //2. 关闭对话框
+        this.dialogFormVisibleAdd = false;
+        //3. 更新视图
+        this.getUserList();
+        //4. 清空文本框
+        // this.form ={}
+        for (const key in this.form) {
+          if (this.form.hasOwnProperty(key)) {
+            this.form[key] = "";
+          }
+        }
+      } else {
+        // this.$message.warning(msg)
+      }
+    },
+    // 添加用户 -- 显示对话框
+    showAddUserDia() {
+      this.dialogFormVisibleAdd = true;
+    },
+    // 请求搜索框 重新获取数据
+    loadUserList() {
+      this.getUserList();
+    },
+    // 搜索用户
+    searchUser() {
+      // 按照input绑定的query参数 发请求
+      this.getUserList();
+    },
     // 分页相关方法
+    // 24条
+    // pagenum=3
+    // pagesize=2
+    // 1,2/3,4/5,6/
+    // 数据->
     // 每页显示条数变化时 触发
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
-      this.pagesize=val
-      this.pagenum=1
-      this.getUserList() 
+      this.pagesize = val;
+      this.pagenum = 1;
+      this.getUserList();
     },
     // 页码改变时 触发
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
-      this.pagenum=val
-      this.getUserList() 
+      this.pagenum = val;
+      this.getUserList();
     },
     // 获取用户列表的请求
     async getUserList() {
@@ -110,7 +193,7 @@ export default {
           this.pagesize
         }`
       );
-      console.log(res);
+      //console.log(res);
       const {
         meta: { status, msg },
         data: { users, total }
@@ -121,7 +204,7 @@ export default {
         // 2.给total赋值 数据库数据总数
         this.total = total;
         // 3.提示
-        this.$message.success(msg);
+        //this.$message.success(msg);
       } else {
         // 提示
         this.$message.warning(msg);
