@@ -48,6 +48,15 @@
       </el-table-column>
     </el-table>
     <!-- 4.分页 -->
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="pagenum"
+      :page-sizes="[2, 4, 6, 8]"
+      :page-size="2"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total"
+    ></el-pagination>
   </el-card>
 </template>
 
@@ -58,9 +67,11 @@ export default {
       query: "",
       // 表格绑定的数据
       userlist: [],
-      // 分页相关数据
-      total: -1,
+      // 数据库数据总数
+      total: 0,
+      // 初始显示页数
       pagenum: 1,
+      // 每页显示条数
       pagesize: 2
     };
   },
@@ -68,6 +79,20 @@ export default {
     this.getUserList();
   },
   methods: {
+    // 分页相关方法
+    // 每页显示条数变化时 触发
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.pagesize=val
+      this.pagenum=1
+      this.getUserList() 
+    },
+    // 页码改变时 触发
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.pagenum=val
+      this.getUserList() 
+    },
     // 获取用户列表的请求
     async getUserList() {
       // query查询参数 可以为空 (搜索框)
@@ -93,7 +118,7 @@ export default {
       if (status === 200) {
         // 1.给表格数据赋值
         this.userlist = users;
-        // 2.给total赋值
+        // 2.给total赋值 数据库数据总数
         this.total = total;
         // 3.提示
         this.$message.success(msg);
