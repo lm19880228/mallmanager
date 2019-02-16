@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import ElementUI from 'element-ui'
+// MyBread 其实是组件选项所在的对象{template:'',data等}
+import MyBread from '@/components/cuscom/MyBread.vue'
 import moment from 'moment'
 // 回顾axios
 // import axios from 'axios'
@@ -25,6 +27,8 @@ Vue.config.productionTip = false
 Vue.filter('fmtdate', v => {
   return moment(v).format('YYYY-MM-DD')
 })
+// 全局自定义组件
+Vue.component(MyBread.name, MyBread)
 
 /* eslint-disable no-new */
 new Vue({

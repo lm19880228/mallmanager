@@ -34,7 +34,7 @@
             <!-- 此处相当于router-link -->
             <el-menu-item index="users">
               <i class="el-icon-menu"></i>
-              <span>用户量列表</span>
+              <span>用户列表</span>
             </el-menu-item>
           </el-submenu>
           <!-- 2 -->
@@ -43,11 +43,11 @@
               <i class="el-icon-star-on"></i>
               <span>权限管理</span>
             </template>
-            <el-menu-item index="2-1">
+            <el-menu-item index="role">
               <i class="el-icon-menu"></i>
               <span>角色列表</span>
             </el-menu-item>
-            <el-menu-item index="2-2">
+            <el-menu-item index="rights">
               <i class="el-icon-star-off"></i>
               <span>权限列表</span>
             </el-menu-item>
