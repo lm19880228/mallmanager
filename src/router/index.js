@@ -13,6 +13,8 @@ import Goods from "@/components/goods/goodslist.vue";
 import Goodsadd from "@/components/goods/goodsadd.vue";
 import Params from "@/components/goods/cateparams.vue";
 import Goodscate from "@/components/goods/goodscate.vue";
+import Order from "@/components/order/order.vue";
+import Reports from "@/components/echarts/echarts.vue";
 
 import { MessageBox } from "element-ui";
 Vue.use(Router);
@@ -66,6 +68,16 @@ const router = new Router({
           name: "categories",
           path: "/categories",
           component: Goodscate
+        },
+        {
+          name: "order",
+          path: "/orders",
+          component: Order
+        },
+        {
+          name: "echarts",
+          path: "/reports",
+          component: Reports
         }
       ]
     }
