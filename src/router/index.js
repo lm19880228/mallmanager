@@ -9,6 +9,11 @@ import Home from "@/components/home/home.vue";
 import Users from "@/components/users/users.vue";
 import Right from "@/components/rights/right.vue";
 import Roles from "@/components/rights/role.vue";
+import Goods from "@/components/goods/goodslist.vue";
+import Goodsadd from "@/components/goods/goodsadd.vue";
+import Params from "@/components/goods/cateparams.vue";
+import Goodscate from "@/components/goods/goodscate.vue";
+
 import { MessageBox } from "element-ui";
 Vue.use(Router);
 
@@ -39,6 +44,28 @@ const router = new Router({
           name: "roles",
           path: "/roles",
           component: Roles
+        },
+        {
+          name: "goods",
+          path: "/goods",
+          component: Goods
+        },
+        {
+          name: "goodsadd",
+          // 此处路径不是后台返回数据 路径随意填写
+          path: "/goodsadd",
+          component: Goodsadd
+        },
+        {
+          name: "params",
+          // 此处路径不是后台返回数据 路径随意填写
+          path: "/params",
+          component: Params
+        },
+        {
+          name: "categories",
+          path: "/categories",
+          component: Goodscate
         }
       ]
     }

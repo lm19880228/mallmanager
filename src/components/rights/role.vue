@@ -163,7 +163,7 @@ export default {
        // arr = arr1+arr2
        // ES6 自动展开运算符 ...数组/对象 
        // [...arr1] == [1,2,3]
-       let arr = [...arr1,...arr2]
+       const arr = [...arr1,...arr2]
        console.log(arr)
       //  var str = arr.join('')
       //  console.log(str)
@@ -171,7 +171,7 @@ export default {
        // 
        // 1. 在Vue中操作的dom元素 给要操作的元素设置ref属性值 input ref="txt"
        // 2. this.$refs.ref属性值.js方法名() this.$ref.txt.foucs()
-       this.$refs.tree.getCheckedKeys()
+       //this.$refs.tree.getCheckedKeys()
 
        const res = await this.$http.post(`roles/${this.currRoleId}/rights`,{rids:arr.join(',')})
        console.log(res)
